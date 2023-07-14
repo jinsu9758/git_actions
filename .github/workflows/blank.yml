@@ -1,0 +1,38 @@
+name: Python
+
+on: workflow_dispatch
+
+jobs:
+  build:
+
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        python-version: ["3.8", "3.9", "3.10"]
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+      
+      - name: Set up Python ${{ matrix.python-version }}
+        uses: actions/setup-python@v4
+        with:
+          python-version: ${{ matrix.python-version }}
+
+      - name: Display Python version
+        run: python -c "import sys; print(sys.version)"
+        id: display_version
+        env:
+          PYTHON_VERSION: ${{ matrix.python-version }}
+        
+      - name: Create output file
+        run: echo "python_version=${{ env.PYTHON_VERSION }}" >> ${{ github.workspace }}/output.txt
+
+      - name: Show output file
+        run: cat ${{ github.workspace }}/output.txt
+
+      - name: Upload output artifact
+        uses: actions/upload-artifact@v1
+        with:
+          name: python_output
+          path: ${{ github.workspace }}/output.txt
