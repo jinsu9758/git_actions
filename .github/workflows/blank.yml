@@ -6,27 +6,43 @@ jobs:
   build:
 
     runs-on: ubuntu-latest
-    strategy:
-      matrix:
-        python-version: ["3.8", "3.9", "3.10"]
 
     steps:
       - name: Checkout code
         uses: actions/checkout@v3
       
-      - name: Set up Python ${{ matrix.python-version }}
-        uses: actions/setup-python@v4
+      - name: Set up Python
+        uses: actions/setup-python@v2
         with:
-          python-version: ${{ matrix.python-version }}
+          python-version: '3.8'
+      
+      - name: Display Python 3.8 version
+        run: |
+          python -c "import sys; print(sys.version)" >> output.txt
 
-      - name: Display Python version
-        run: python -c "import sys; print(sys.version)" >> output.txt
+      - name: Set up Python
+        uses: actions/setup-python@v2
+        with:
+          python-version: '3.9'
+
+      - name: Display Python 3.9 version
+        run: |
+          python -c "import sys; print(sys.version)" >> output.txt
+
+      - name: Set up Python
+        uses: actions/setup-python@v2
+        with:
+          python-version: '3.10'
+
+      - name: Display Python 3.10 version
+        run: |
+          python -c "import sys; print(sys.version)" >> output.txt
 
       - name: Show output file
         run: cat output.txt
 
       - name: Upload output artifact
-        uses: actions/upload-artifact@v1
+        uses: actions/upload-artifact@v2
         with:
           name: python_output
           path: output.txt
