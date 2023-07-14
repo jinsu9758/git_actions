@@ -42,7 +42,7 @@ jobs:
         run: cat output.txt
 
       - name: Upload output artifact
-        uses: actions/upload-artifact@v2
+        uses: actions/upload-artifact@v1
         with:
           name: python_output
           path: output.txt
