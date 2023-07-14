@@ -12,32 +12,29 @@ jobs:
         uses: actions/checkout@v1
       
       - name: Set up Python 3.8
-        uses: actions/setup-python@v1
+        uses: actions/setup-python@v2
         with:
           python-version: '3.8'
       
       - name: Display Python 3.8 version
         run: |
           python -c "import sys; print(sys.version)" >> output.txt
-
       - name: Set up Python 3.9
-        uses: actions/setup-python@v1
+        uses: actions/setup-python@v2
         with:
           python-version: '3.9'
 
       - name: Display Python 3.9 version
         run: |
           python -c "import sys; print(sys.version)" >> output.txt
-
       - name: Set up Python 3.10
-        uses: actions/setup-python@v1
+        uses: actions/setup-python@v2
         with:
           python-version: '3.10'
 
       - name: Display Python 3.10 version
         run: |
           python -c "import sys; print(sys.version)" >> output.txt
-
       - name: Show output file
         run: cat output.txt
 
